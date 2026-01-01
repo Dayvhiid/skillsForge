@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - SkillForge Free Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/portal.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="/" class="logo">SkillForge</a>
+            <nav class="nav-links">
+                <span id="studentName" class="text-gold"></span>
+                <a href="#" id="logoutBtn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 3rem 20px;">
+        <div class="card">
+            <div class="card-header">
+                <h1>📚 My Dashboard</h1>
+                <p id="trackInfo"></p>
+            </div>
+
+            <div id="alertBox" class="alert"></div>
+
+            <div id="loadingState" style="text-align: center; padding: 3rem;">
+                <div class="spinner" style="width: 40px; height: 40px; border-width: 4px;"></div>
+                <p class="mt-2 text-muted">Loading your handbooks...</p>
+            </div>
+
+            <div id="handbooksContainer" style="display: none;">
+                <h2 class="text-gold mb-3">Available Handbooks</h2>
+                <div id="handbooksList" class="dashboard-grid"></div>
+
+                <div id="noHandbooks" style="display: none; text-align: center; padding: 3rem;">
+                    <p class="text-muted">No handbooks available for your track yet.</p>
+                    <p class="text-muted mt-2">Check back soon!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+        // Redirect if not logged in
+        if (!token) {
+            window.location.href = '/public/login.html';
+        }
+
+        const alertBox = document.getElementById('alertBox');
+        const loadingState = document.getElementById('loadingState');
+        const handbooksContainer = document.getElementById('handbooksContainer');
+        const handbooksList = document.getElementById('handbooksList');
+        const noHandbooks = document.getElementById('noHandbooks');
+
+        function showAlert(message, type) {
+            alertBox.textContent = message;
+            alertBox.className = `alert alert-${type} show`;
+        }
+
+        // Set user info
+        document.getElementById('studentName').textContent = user.fullName || 'Student';
+        document.getElementById('trackInfo').textContent = `Track: ${user.track || 'Unknown'}`;
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = '/login.html';
+        });
+
+        // Fetch handbooks
+        async function loadHandbooks() {
+            try {
+                const response = await fetch('/api/student/handbooks', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                loadingState.style.display = 'none';
+                handbooksContainer.style.display = 'block';
+
+                if (data.success && data.data.length > 0) {
+                    renderHandbooks(data.data);
+                } else {
+                    noHandbooks.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                loadingState.style.display = 'none';
+                showAlert('Failed to load handbooks. Please refresh the page.', 'error');
+            }
+        }
+
+        function renderHandbooks(handbooks) {
+            handbooksList.innerHTML = handbooks.map(handbook => `
+                <div class="handbook-card" onclick="openHandbook('${handbook._id}')">
+                    <h3>${handbook.title}</h3>
+                    <p>${handbook.description || 'No description available'}</p>
+                    <div class="handbook-meta">
+                        <span>📄 ${handbook.totalPages || 'N/A'} pages</span>
+                        <span>👁️ ${handbook.viewCount} views</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <small class="text-muted mt-1" style="display: block;">Click to read</small>
+                </div>
+            `).join('');
+        }
+
+        function openHandbook(handbookId) {
+            window.location.href = `/handbook-reader.html?id=${handbookId}`;
+        }
+
+        // Load handbooks on page load
+        loadHandbooks();
+    </script>
+</body>
+
+</html>

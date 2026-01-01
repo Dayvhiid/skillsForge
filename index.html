@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillForge - Forge Skills. Build Competence. Create Opportunities.</title>
+    <meta name="description"
+        content="Empowering individuals globally through skill development, trading support, outsourced projects & digital marketing solutions.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#0A0F1F',
+                        'electric': '#1E90FF',
+                        'cyan-glow': '#00E5FF',
+                        'gold': '#F7C843',
+                        'soft-gray': '#F5F7FA',
+                        'slate': '#C8D0E0'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glow-btn {
+            box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);
+        }
+
+        .glow-btn:hover {
+            box-shadow: 0 0 30px rgba(30, 144, 255, 0.8);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-light {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #1E90FF 0%, #00E5FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00E5FF;
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+            }
+        }
+
+        .particle:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        .particle:nth-child(4) {
+            left: 40%;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(5) {
+            left: 50%;
+            animation-delay: 3s;
+        }
+
+        .particle:nth-child(6) {
+            left: 60%;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(7) {
+            left: 70%;
+            animation-delay: 2.5s;
+        }
+
+        .particle:nth-child(8) {
+            left: 80%;
+            animation-delay: 4.5s;
+        }
+
+        .particle:nth-child(9) {
+            left: 90%;
+            animation-delay: 1.5s;
+        }
+
+        .schedule-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-in-out;
+        }
+
+        .schedule-container.active {
+            max-height: 3000px;
+        }
+
+        .rotate-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .rotate-icon.active {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-navy text-white">
+
+    <!-- HERO SECTION -->
+    <section
+        class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-navy via-[#0f1829] to-navy">
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-5xl mx-auto" data-aos="fade-up">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Forge Skills. Build Competence.<br />
+                    <span class="gradient-text">Create Opportunities.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate mb-12 max-w-3xl mx-auto">
+                    Empowering individuals globally through skill development, trading support, outsourced projects &
+                    digital marketing solutions.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+                    <a href="/register.html"
+                        class="glow-btn bg-electric hover:bg-[#1c7ed6] text-white px-10 py-4 rounded-full font-semibold text-lg transition-all transform hover:scale-105">
+                        Get Started
+                    </a>
+                    <a href="#about"
+                        class="border-2 border-white hover:bg-white hover:text-navy px-10 py-4 rounded-full font-semibold text-lg transition-all transform hover:scale-105">
+                        Explore Services
+                    </a>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-8 text-sm md:text-base text-slate">
+                    <div class="flex items-center gap-2">
+                        <span class="text-cyan-glow text-2xl">●</span>
+                        <span>5000+ trainees</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-cyan-glow text-2xl">●</span>
+                        <span>Global reach</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-cyan-glow text-2xl">●</span>
+                        <span>Career placement</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-cyan-glow text-2xl">●</span>
+                        <span>Trading support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-soft-gray to-transparent"></div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-soft-gray">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div data-aos="fade-right">
+                        <h2 class="text-4xl md:text-5xl font-bold text-navy mb-6">
+                            Transforming Potential Into <span class="gradient-text">Opportunity</span>
+                        </h2>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            SkillForge is a global skill development ecosystem transforming raw potential into
+                            competence, opportunity, and income.
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            We train individuals, support traders, connect graduates to paid projects, and empower
+                            brands through community-driven marketing.
+                        </p>
+                    </div>
+                    <div data-aos="fade-left" class="relative">
+                        <div class="glass-light rounded-3xl p-8 transform hover:scale-105 transition-transform">
+                            <div
+                                class="aspect-video bg-gradient-to-br from-electric to-cyan-glow rounded-2xl flex items-center justify-center">
+                                <svg class="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE SERVICES -->
+    <section id="services" class="py-24 bg-navy">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Four Pillar <span class="gradient-text">Business
+                        Model</span></h2>
+                <p class="text-slate text-xl">Comprehensive solutions for your growth journey</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Service 1 -->
+                <div class="glass rounded-3xl p-8 hover:scale-105 transition-all group" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-electric to-cyan-glow rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-lg group-hover:shadow-cyan-glow/50 transition-shadow">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Global Professional Skills Academy</h3>
+                    <ul class="text-slate space-y-2">
+                        <li>• Zero-to-pro digital skill programs</li>
+                        <li>• Masterclass + certification + mentorship</li>
+                        <li>• Career placement & real-world practice</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass rounded-3xl p-8 hover:scale-105 transition-all group" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-electric to-cyan-glow rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-lg group-hover:shadow-cyan-glow/50 transition-shadow">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Financial Brokerage & Trading Support</h3>
+                    <ul class="text-slate space-y-2">
+                        <li>• Account funding & withdrawal assistance</li>
+                        <li>• Safe broker guidance & trader logistics</li>
+                        <li>• Profit security support services</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass rounded-3xl p-8 hover:scale-105 transition-all group" data-aos="fade-up"
+                    data-aos-delay="300">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-electric to-cyan-glow rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-lg group-hover:shadow-cyan-glow/50 transition-shadow">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Project Outsourcing & Creative Agency</h3>
+                    <ul class="text-slate space-y-2">
+                        <li>• Graduates execute client projects</li>
+                        <li>• Competitive merit-based system</li>
+                        <li>• Top performer earns 55% revenue</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass rounded-3xl p-8 hover:scale-105 transition-all group" data-aos="fade-up"
+                    data-aos-delay="400">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-electric to-cyan-glow rounded-2xl flex items-center justify-center mb-6 group-hover:shadow-lg group-hover:shadow-cyan-glow/50 transition-shadow">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Social Media Marketing & Traffic Sourcing</h3>
+                    <ul class="text-slate space-y-2">
+                        <li>• Community-powered advertising campaigns</li>
+                        <li>• Massive audience reach & engagement ops</li>
+                        <li>• Brand visibility & traffic generation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-12" data-aos="fade-up">
+                <a href="#" class="inline-block text-cyan-glow hover:text-gold font-semibold text-lg transition-colors">
+                    View Full Program →
+                </a>
+            </div>
+
+            <!-- VIEW SCHEDULE BUTTON -->
+            <div class="text-center mt-16" data-aos="fade-up">
+                <button id="scheduleToggle"
+                    class="glow-btn bg-gradient-to-r from-electric to-cyan-glow hover:from-[#1c7ed6] hover:to-[#00d4e6] text-white px-12 py-5 rounded-full font-bold text-lg transition-all transform hover:scale-105 flex items-center gap-3 mx-auto shadow-lg">
+                    <span>View 2026 Schedule</span>
+                    <svg class="w-6 h-6 rotate-icon" id="scheduleIcon" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- 2026 COHORT SCHEDULE SECTION (HIDDEN BY DEFAULT) -->
+            <div id="scheduleSection" class="schedule-container mt-12">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12" data-aos="fade-up">
+                        <h3 class="text-3xl md:text-4xl font-bold mb-4">
+                            <span class="gradient-text">2026 Cohort Schedule</span>
+                        </h3>
+                        <p class="text-slate text-lg">Your roadmap to professional excellence</p>
+                    </div>
+
+                    <!-- PHASE 1: FREE ACADEMY -->
+                    <div class="glass rounded-3xl p-8 mb-8" data-aos="fade-up">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-electric to-cyan-glow rounded-xl flex items-center justify-center">
+                                <span class="text-2xl font-bold">1</span>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-bold">Phase 1 — Free Academy Live Classes</h4>
+                                <p class="text-slate">January – April 2026</p>
+                            </div>
+                        </div>
+                        <p class="text-slate mb-6">Each month runs Weeks 1–3 (Live Classes) + Week 4 Break</p>
+
+                        <!-- Desktop Table -->
+                        <div class="hidden md:block overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead>
+                                    <tr class="border-b border-cyan-glow/30">
+                                        <th class="py-4 px-4 font-bold text-cyan-glow">Month</th>
+                                        <th class="py-4 px-4 font-bold text-cyan-glow">Skill Track 1 (Trading/Creative)
+                                        </th>
+                                        <th class="py-4 px-4 font-bold text-cyan-glow">Skill Track 2 (Tech/Creative)
+                                        </th>
+                                        <th class="py-4 px-4 font-bold text-cyan-glow">Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-white/10 hover:bg-white/5 transition-colors">
+                                        <td class="py-4 px-4 font-semibold text-gold">January</td>
+                                        <td class="py-4 px-4">Forex Synthetic Indices</td>
+                                        <td class="py-4 px-4">Graphics Design</td>
+                                        <td class="py-4 px-4 text-slate">Weeks 1–3 (Live) + Week 4 Break</td>
+                                    </tr>
+                                    <tr class="border-b border-white/10 hover:bg-white/5 transition-colors">
+                                        <td class="py-4 px-4 font-semibold text-gold">February</td>
+                                        <td class="py-4 px-4">Stock Market Trading</td>
+                                        <td class="py-4 px-4">Web Design & Development</td>
+                                        <td class="py-4 px-4 text-slate">Weeks 1–3 (Live) + Week 4 Break</td>
+                                    </tr>
+                                    <tr class="border-b border-white/10 hover:bg-white/5 transition-colors">
+                                        <td class="py-4 px-4 font-semibold text-gold">March</td>
+                                        <td class="py-4 px-4">Forex Currency Pairs</td>
+                                        <td class="py-4 px-4">Discord Design & Development <span
+                                                class="text-cyan-glow text-xs font-bold">(NEW)</span></td>
+                                        <td class="py-4 px-4 text-slate">Weeks 1–3 (Live) + Week 4 Break</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="py-4 px-4 font-semibold text-gold">April</td>
+                                        <td class="py-4 px-4">Photography & Editing</td>
+                                        <td class="py-4 px-4">Cybersecurity</td>
+                                        <td class="py-4 px-4 text-slate">Weeks 1–3 (Live) + Week 4 Break</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Mobile Cards -->
+                        <div class="md:hidden space-y-4">
+                            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20">
+                                <div class="font-bold text-gold text-xl mb-4">January</div>
+                                <div class="space-y-3">
+                                    <div class="bg-navy/50 rounded-lg p-3">
+                                        <div class="text-cyan-glow font-semibold text-xs mb-1">Track 1: Trading/Creative
+                                        </div>
+                                        <div class="text-white font-medium">Forex Synthetic Indices</div>
+                                    </div>
+                                    <div class="bg-navy/50 rounded-lg p-3">
+                                        <div class="text-cyan-glow font-semibold text-xs mb-1">Track 2: Tech/Creative
+                                        </div>
+                                        <div class="text-white font-medium">Graphics Design</div>
+                                    </div>
+                                    <div class="text-slate text-sm pt-2 border-t border-white/10">⏱️ Weeks 1–3 (Live) +
+                                        Week 4 Break</div>
+                                </div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20">
+                                <div class="font-bold text-gold text-xl mb-4">February</div>
+                                <div class="space-y-3">
+                                    <div class="bg-navy/50 rounded-lg p-3">
+                                        <div class="text-cyan-glow font-semibold text-xs mb-1">Track 1: Trading/Creative
+                                        </div>
+                                        <div class="text-white font-medium">Stock Market Trading</div>
+                                    </div>
+                                    <div class="bg-navy/50 rounded-lg p-3">
+                                        <div class="text-cyan-glow font-semibold text-xs mb-1">Track 2: Tech/Creative
+                                        </div>
+                                        <div class="text-white font-medium">Web Design & Development</div>
+                                    </div>
+                                    <div class="text-slate text-sm pt-2 border-t border-white/10">⏱️ Weeks 1–3 (Live) +
+                                        Week 4 Break</div>
+                                </div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20">
+                                <div class="font-bold text-gold text-xl mb-4">March</div>
+                                <div class="space-y-3">
+                                    <div class="bg-navy/50 rounded-lg p-3">
+                                        <div class="text-cyan-glow font-semibold text-xs mb-1">Track 1: Trading/Creative
+                                        </div>
+                                        <div class="text-white font-medium">Forex Currency Pairs</div>
+                                    </div>
+                                    <div class="bg-navy/50 rounded-lg p-3">
+                                        <div class="text-cyan-glow font-semibold text-xs mb-1">Track 2: Tech/Creative
+                                        </div>
+                                        <div class="text-white font-medium">Discord Design & Development <span
+                                                class="inline-block bg-cyan-glow/20 text-cyan-glow text-xs font-bold px-2 py-1 rounded-full ml-1">NEW</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-slate text-sm pt-2 border-t border-white/10">⏱️ Weeks 1–3 (Live) +
+                                        Week 4 Break</div>
+                                </div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/20">
+                                <div class="font-bold text-gold text-xl mb-4">April</div>
+                                <div class="space-y-3">
+                                    <div class="bg-navy/50 rounded-lg p-3">
+                                        <div class="text-cyan-glow font-semibold text-xs mb-1">Track 1: Trading/Creative
+                                        </div>
+                                        <div class="text-white font-medium">Photography & Editing</div>
+                                    </div>
+                                    <div class="bg-navy/50 rounded-lg p-3">
+                                        <div class="text-cyan-glow font-semibold text-xs mb-1">Track 2: Tech/Creative
+                                        </div>
+                                        <div class="text-white font-medium">Cybersecurity</div>
+                                    </div>
+                                    <div class="text-slate text-sm pt-2 border-t border-white/10">⏱️ Weeks 1–3 (Live) +
+                                        Week 4 Break</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PHASE 2: THE FORGE CHALLENGE -->
+                    <div class="glass rounded-3xl p-8 mb-8" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-gold to-[#f5c035] rounded-xl flex items-center justify-center">
+                                <span class="text-2xl font-bold text-navy">2</span>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-bold">Phase 2 — The Forge Challenge</h4>
+                                <p class="text-slate">May 2026 — Global Skill Competition</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                            <div
+                                class="bg-white/95 backdrop-blur-sm rounded-2xl p-5 sm:p-6 transform hover:scale-105 transition-transform shadow-lg">
+                                <div class="text-3xl sm:text-4xl mb-3">🏆</div>
+                                <h5 class="font-bold text-navy mb-2 text-base sm:text-lg">Competition Month</h5>
+                                <p class="text-gray-700 text-sm">Showcase your skills globally</p>
+                            </div>
+                            <div
+                                class="bg-white/95 backdrop-blur-sm rounded-2xl p-5 sm:p-6 transform hover:scale-105 transition-transform shadow-lg">
+                                <div class="text-3xl sm:text-4xl mb-3">💰</div>
+                                <h5 class="font-bold text-navy mb-2 text-base sm:text-lg">Registration Fee</h5>
+                                <p class="text-gray-700 text-sm font-semibold">$15 or ₦15,000</p>
+                            </div>
+                            <div
+                                class="bg-white/95 backdrop-blur-sm rounded-2xl p-5 sm:p-6 transform hover:scale-105 transition-transform shadow-lg">
+                                <div class="text-3xl sm:text-4xl mb-3">💻</div>
+                                <h5 class="font-bold text-navy mb-2 text-base sm:text-lg">Grand Prize</h5>
+                                <p class="text-gray-700 text-sm font-semibold">Laptop + Worldwide Shipping</p>
+                            </div>
+                            <div
+                                class="bg-white/95 backdrop-blur-sm rounded-2xl p-5 sm:p-6 transform hover:scale-105 transition-transform shadow-lg">
+                                <div class="text-3xl sm:text-4xl mb-3">🌟</div>
+                                <h5 class="font-bold text-navy mb-2 text-base sm:text-lg">Top 30 Showcase</h5>
+                                <p class="text-gray-700 text-sm">Projects featured on website</p>
+                            </div>
+                            <div
+                                class="bg-white/95 backdrop-blur-sm rounded-2xl p-5 sm:p-6 transform hover:scale-105 transition-transform shadow-lg">
+                                <div class="text-3xl sm:text-4xl mb-3">📜</div>
+                                <h5 class="font-bold text-navy mb-2 text-base sm:text-lg">Certificate</h5>
+                                <p class="text-gray-700 text-sm">All participants receive one</p>
+                            </div>
+                            <div
+                                class="bg-white/95 backdrop-blur-sm rounded-2xl p-5 sm:p-6 transform hover:scale-105 transition-transform shadow-lg">
+                                <div class="text-3xl sm:text-4xl mb-3">🎁</div>
+                                <h5 class="font-bold text-navy mb-2 text-base sm:text-lg">Bonus Benefit</h5>
+                                <p class="text-gray-700 text-sm">Enrollment discount for winners</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PHASE 3: MASTERCLASS INTENSIVE -->
+                    <div class="glass rounded-3xl p-8" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-electric to-cyan-glow rounded-xl flex items-center justify-center">
+                                <span class="text-2xl font-bold">3</span>
+                            </div>
+                            <div>
+                                <h4 class="text-2xl font-bold">Phase 3 — Masterclass Intensive</h4>
+                                <p class="text-slate">June – August 2026 — Professional Training</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-electric to-cyan-glow rounded-lg flex items-center justify-center">
+                                    <span class="text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">3-Month Professional Training</h5>
+                                    <p class="text-slate text-sm">Intensive skill development program</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-electric to-cyan-glow rounded-lg flex items-center justify-center">
+                                    <span class="text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">Weekly 1-on-1 Mentorship</h5>
+                                    <p class="text-slate text-sm">Personalized guidance from experts</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-electric to-cyan-glow rounded-lg flex items-center justify-center">
+                                    <span class="text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">Client Project Execution</h5>
+                                    <p class="text-slate text-sm">Real-world experience with live projects</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-electric to-cyan-glow rounded-lg flex items-center justify-center">
+                                    <span class="text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">Portfolio & CV Coaching</h5>
+                                    <p class="text-slate text-sm">Professional presentation training</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-electric to-cyan-glow rounded-lg flex items-center justify-center">
+                                    <span class="text-xl">✓</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">Job/Freelance Placement</h5>
+                                    <p class="text-slate text-sm">Career support and opportunities</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-gold to-[#f5c035] rounded-lg flex items-center justify-center">
+                                    <span class="text-xl text-navy">★</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold mb-1">Certificate + Digital Badge</h5>
+                                    <p class="text-slate text-sm">Recognized professional credentials</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="mt-8 p-6 bg-gradient-to-r from-electric/10 to-cyan-glow/10 rounded-2xl border border-cyan-glow/30">
+                            <p class="text-center text-sm">
+                                <span class="text-cyan-glow font-bold">💡 Pro Tip:</span>
+                                <span class="text-slate">Challenge certificate grants you an enrollment discount for the
+                                    Masterclass!</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACADEMY PATHWAY -->
+    <section class="py-24 bg-soft-gray">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-navy mb-4">Your Learning <span
+                        class="gradient-text">Journey</span></h2>
+                <p class="text-gray-700 text-xl">From enrollment to earning opportunities</p>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6" data-aos="fade-up">
+                    <div class="text-center group">
+                        <div
+                            class="glass-light rounded-2xl p-6 mb-4 transform group-hover:scale-110 transition-transform">
+                            <div class="text-4xl mb-2">📝</div>
+                            <div class="text-sm font-semibold text-navy">Enroll</div>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-electric to-cyan-glow rounded-full"></div>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="glass-light rounded-2xl p-6 mb-4 transform group-hover:scale-110 transition-transform">
+                            <div class="text-4xl mb-2">🎯</div>
+                            <div class="text-sm font-semibold text-navy">Foundation</div>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-electric to-cyan-glow rounded-full"></div>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="glass-light rounded-2xl p-6 mb-4 transform group-hover:scale-110 transition-transform">
+                            <div class="text-4xl mb-2">🚀</div>
+                            <div class="text-sm font-semibold text-navy">Masterclass</div>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-electric to-cyan-glow rounded-full"></div>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="glass-light rounded-2xl p-6 mb-4 transform group-hover:scale-110 transition-transform">
+                            <div class="text-4xl mb-2">🏆</div>
+                            <div class="text-sm font-semibold text-navy">Certification</div>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-electric to-cyan-glow rounded-full"></div>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="glass-light rounded-2xl p-6 mb-4 transform group-hover:scale-110 transition-transform">
+                            <div class="text-4xl mb-2">💼</div>
+                            <div class="text-sm font-semibold text-navy">Projects</div>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-electric to-cyan-glow rounded-full"></div>
+                    </div>
+
+                    <div class="text-center group">
+                        <div
+                            class="glass-light rounded-2xl p-6 mb-4 transform group-hover:scale-110 transition-transform">
+                            <div class="text-4xl mb-2">💰</div>
+                            <div class="text-sm font-semibold text-navy">Revenue</div>
+                        </div>
+                        <div class="h-1 bg-gradient-to-r from-gold to-gold rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY SKILLFORGE -->
+    <section class="py-24 bg-gradient-to-br from-navy via-[#0f1829] to-navy">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Why Choose <span
+                        class="gradient-text">SkillForge?</span></h2>
+                <p class="text-slate text-xl">Your success is our mission</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-electric to-cyan-glow rounded-xl flex items-center justify-center">
+                        <span class="text-2xl">✔</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Global Skills Curriculum</h3>
+                        <p class="text-slate">Industry-relevant programs designed for global markets</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-electric to-cyan-glow rounded-xl flex items-center justify-center">
+                        <span class="text-2xl">✔</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Practical Hands-On Learning</h3>
+                        <p class="text-slate">Real-world projects and live mentorship sessions</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="300">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-electric to-cyan-glow rounded-xl flex items-center justify-center">
+                        <span class="text-2xl">✔</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Trading Logistics Support</h3>
+                        <p class="text-slate">Complete financial brokerage assistance</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="400">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-electric to-cyan-glow rounded-xl flex items-center justify-center">
+                        <span class="text-2xl">✔</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Project Placement + Revenue</h3>
+                        <p class="text-slate">Earn from your skills through client projects</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="500">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-electric to-cyan-glow rounded-xl flex items-center justify-center">
+                        <span class="text-2xl">✔</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Community Mentorship</h3>
+                        <p class="text-slate">Collaborative learning with competitions</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="600">
+                    <div
+                        class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-electric to-cyan-glow rounded-xl flex items-center justify-center">
+                        <span class="text-2xl">✔</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Earn From Skills</h3>
+                        <p class="text-slate">Multiple income opportunities post-graduation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-24 bg-soft-gray">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-navy mb-4">Success <span
+                        class="gradient-text">Stories</span></h2>
+                <p class="text-gray-700 text-xl">Hear from our community</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="glass-light rounded-3xl p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-electric to-cyan-glow rounded-full"></div>
+                        <div>
+                            <div class="font-bold text-navy">Sarah Johnson</div>
+                            <div class="text-sm text-gray-600">Digital Marketer</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"SkillForge transformed my learning path into income. The hands-on
+                        approach and real projects gave me confidence to start my career."</p>
+                </div>
+
+                <div class="glass-light rounded-3xl p-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-electric to-cyan-glow rounded-full"></div>
+                        <div>
+                            <div class="font-bold text-navy">Michael Chen</div>
+                            <div class="text-sm text-gray-600">Web Developer</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"I executed my first paid project after graduating. The mentorship
+                        and community support were invaluable to my success."</p>
+                </div>
+
+                <div class="glass-light rounded-3xl p-8" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-electric to-cyan-glow rounded-full"></div>
+                        <div>
+                            <div class="font-bold text-navy">Aisha Patel</div>
+                            <div class="text-sm text-gray-600">Trader</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"The trading support services helped me navigate the financial
+                        markets safely. Now I'm earning consistently with their guidance."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="py-32 bg-gradient-to-br from-navy via-[#0f1829] to-navy relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-4xl mx-auto" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6">
+                    Ready to Forge Your <span class="gradient-text">Future?</span>
+                </h2>
+                <p class="text-xl md:text-2xl text-slate mb-12">
+                    Start learning. Start earning. Start building globally-relevant skills.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="/register.html"
+                        class="glow-btn bg-electric hover:bg-[#1c7ed6] text-white px-12 py-5 rounded-full font-bold text-lg transition-all transform hover:scale-105">
+                        Join The Academy
+                    </a>
+                    <a href="#"
+                        class="bg-gold hover:bg-[#f5c035] text-navy px-12 py-5 rounded-full font-bold text-lg transition-all transform hover:scale-105">
+                        Book a Call
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy border-t border-gray-800 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold gradient-text mb-4">SkillForge</h3>
+                    <p class="text-slate">Empowering individuals globally through skill development and opportunity
+                        creation.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-slate">
+                        <li><a href="#" class="hover:text-cyan-glow transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-cyan-glow transition-colors">Academy</a></li>
+                        <li><a href="#services" class="hover:text-cyan-glow transition-colors">Services</a></li>
+                        <li><a href="/public/register.html" class="hover:text-gold transition-colors font-semibold">📚
+                                Free Academy - Register</a></li>
+                        <li><a href="/public/login.html" class="hover:text-gold transition-colors">Student Login</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4">Contact</h4>
+                    <p class="text-slate mb-2">Email: <a href="mailto:hello@skillforge.live"
+                            class="hover:text-cyan-glow transition-colors">hello@skillforge.live</a></p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-slate">
+                <p>&copy; 2025 SkillForge Organization — All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Schedule Toggle Functionality
+        const scheduleToggle = document.getElementById('scheduleToggle');
+        const scheduleSection = document.getElementById('scheduleSection');
+        const scheduleIcon = document.getElementById('scheduleIcon');
+
+        scheduleToggle.addEventListener('click', function () {
+            scheduleSection.classList.toggle('active');
+            scheduleIcon.classList.toggle('active');
+
+            // Update button text
+            const buttonText = scheduleToggle.querySelector('span');
+            if (scheduleSection.classList.contains('active')) {
+                buttonText.textContent = 'Hide Schedule';
+                // Smooth scroll to schedule
+                setTimeout(() => {
+                    scheduleSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            } else {
+                buttonText.textContent = 'View 2026 Schedule';
+            }
+        });
+    </script>
+</body>
+
+</html>

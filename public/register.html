@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration - SkillForge Free Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/portal.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="/" class="logo">SkillForge</a>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="/login.html">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 3rem 20px; max-width: 500px;">
+        <div class="card">
+            <div class="card-header">
+                <h1>📚 Free Academy Registration</h1>
+                <p>Join thousands of students learning for free</p>
+            </div>
+
+            <div id="alertBox" class="alert"></div>
+
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" class="form-control" placeholder="John Doe"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsappNumber">WhatsApp Number *</label>
+                    <input type="tel" id="whatsappNumber" name="whatsappNumber" class="form-control"
+                        placeholder="+234 XXX XXX XXXX" required>
+                    <small class="text-muted">Include country code</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" name="password" class="form-control"
+                        placeholder="Minimum 6 characters" required minlength="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password *</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+                        placeholder="Re-enter password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="track">Select Your Track *</label>
+                    <select id="track" name="track" class="form-control" required>
+                        <option value="">-- Choose a track --</option>
+                        <option value="Financial Markets">Financial Markets</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Photography">Photography</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn btn-primary btn-block">
+                    <span id="btnText">Create Account</span>
+                    <span id="btnSpinner" class="spinner" style="display: none;"></span>
+                </button>
+            </form>
+
+            <p class="text-center mt-3 text-muted">
+                Already have an account? <a href="/login.html" style="color: var(--gold);">Login here</a>
+            </p>
+        </div>
+    </main>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const alertBox = document.getElementById('alertBox');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnSpinner = document.getElementById('btnSpinner');
+
+        function showAlert(message, type) {
+            alertBox.textContent = message;
+            alertBox.className = `alert alert-${type} show`;
+            setTimeout(() => {
+                alertBox.classList.remove('show');
+            }, 5000);
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                showAlert('Passwords do not match!', 'error');
+                return;
+            }
+
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                whatsappNumber: document.getElementById('whatsappNumber').value,
+                password: password,
+                track: document.getElementById('track').value
+            };
+
+            // Disable button and show spinner
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'inline-block';
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Store token
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+
+                    showAlert('Registration successful! Redirecting...', 'success');
+
+                    setTimeout(() => {
+                        window.location.href = '/public/student-dashboard.html';
+                    }, 1500);
+                } else {
+                    showAlert(data.message || 'Registration failed. Please try again.', 'error');
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    btnSpinner.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('An error occurred. Please try again.', 'error');
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnSpinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

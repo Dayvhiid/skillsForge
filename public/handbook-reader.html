@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handbook Reader - SkillForge Free Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/portal.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .reader-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .reader-header {
+            background: rgba(5, 11, 24, 0.98);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .reader-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .reader-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .reader-controls button {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reader-controls button:hover:not(:disabled) {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+        }
+
+        .reader-controls button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            color: var(--slate);
+            font-size: 0.9rem;
+        }
+
+        .pdf-viewer {
+            flex: 1;
+            overflow: auto;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem;
+            position: relative;
+        }
+
+        #pdfCanvas {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .ad-slot {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(212, 175, 55, 0.3);
+            padding: 1rem;
+            text-align: center;
+            color: var(--slate);
+            font-size: 0.85rem;
+        }
+
+        .sidebar-ad {
+            position: fixed;
+            right: 20px;
+            top: 120px;
+            width: 200px;
+            height: 400px;
+        }
+
+        @media (max-width: 1200px) {
+            .sidebar-ad {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .reader-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .pdf-viewer {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reader-container">
+        <div class="reader-header">
+            <div>
+                <a href="/public/student-dashboard.html"
+                    style="color: var(--slate); text-decoration: none; font-size: 0.9rem;">← Back to Dashboard</a>
+                <div class="reader-title" id="handbookTitle">Loading...</div>
+            </div>
+
+            <div class="reader-controls">
+                <button id="prevBtn" disabled>← Previous</button>
+                <span class="page-info">
+                    Page <span id="currentPage">1</span> of <span id="totalPages">-</span>
+                </span>
+                <button id="nextBtn" disabled>Next →</button>
+                <button id="zoomOut">-</button>
+                <span class="page-info"><span id="zoomLevel">100</span>%</span>
+                <button id="zoomIn">+</button>
+            </div>
+        </div>
+
+        <!-- Ad Slot: Header Banner -->
+        <div class="ad-slot" style="height: 90px;">
+            📢 Ad Space - Header Banner (728x90)
+        </div>
+
+        <div class="pdf-viewer" id="pdfViewer">
+            <canvas id="pdfCanvas"></canvas>
+        </div>
+
+        <!-- Ad Slot: Sidebar (Desktop only) -->
+        <div class="sidebar-ad ad-slot">
+            📢 Ad Space<br>Sidebar<br>(200x400)
+        </div>
+    </div>
+
+    <script>
+        // Anti-piracy: Disable right-click
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Anti-piracy: Disable keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Disable Ctrl+S (Save)
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+P (Print)
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                return false;
+            }
+            // Disable Ctrl+Shift+I (DevTools)
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                return false;
+            }
+            // Disable F12 (DevTools)
+            if (e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Get handbook ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const handbookId = urlParams.get('id');
+        const token = localStorage.getItem('token');
+
+        if (!token || !handbookId) {
+            window.location.href = '/public/student-dashboard.html';
+        }
+
+        // PDF.js setup
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        let pdfDoc = null;
+        let currentPage = 1;
+        let totalPages = 0;
+        let scale = 1.5;
+        const canvas = document.getElementById('pdfCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Fetch handbook details
+        async function loadHandbook() {
+            try {
+                const response = await fetch(`/api/student/handbook/${handbookId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    document.getElementById('handbookTitle').textContent = data.data.title;
+                    loadPDF(data.data.filePath);
+                } else {
+                    alert('Failed to load handbook');
+                    window.location.href = '/public/student-dashboard.html';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error loading handbook');
+                window.location.href = '/public/student-dashboard.html';
+            }
+        }
+
+        async function loadPDF(pdfPath) {
+            try {
+                const loadingTask = pdfjsLib.getDocument('/' + pdfPath);
+                pdfDoc = await loadingTask.promise;
+                totalPages = pdfDoc.numPages;
+                document.getElementById('totalPages').textContent = totalPages;
+
+                // Load saved progress
+                await loadProgress();
+
+                renderPage(currentPage);
+                updateButtons();
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                alert('Error loading PDF file');
+            }
+        }
+
+        async function renderPage(pageNum) {
+            const page = await pdfDoc.getPage(pageNum);
+            const viewport = page.getViewport({ scale: scale });
+
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+
+            await page.render(renderContext).promise;
+            document.getElementById('currentPage').textContent = pageNum;
+
+            // Save progress
+            saveProgress(pageNum);
+        }
+
+        async function loadProgress() {
+            try {
+                const response = await fetch(`/api/student/progress/${handbookId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+                if (data.success && data.data) {
+                    currentPage = data.data.lastPageRead || 1;
+                }
+            } catch (error) {
+                console.error('Error loading progress:', error);
+            }
+        }
+
+        async function saveProgress(pageNum) {
+            try {
+                await fetch('/api/student/progress', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        handbookId: handbookId,
+                        lastPageRead: pageNum,
+                        timeSpent: 1
+                    })
+                });
+            } catch (error) {
+                console.error('Error saving progress:', error);
+            }
+        }
+
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentPage <= 1;
+            document.getElementById('nextBtn').disabled = currentPage >= totalPages;
+        }
+
+        // Navigation controls
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderPage(currentPage);
+                updateButtons();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderPage(currentPage);
+                updateButtons();
+            }
+        });
+
+        // Zoom controls
+        document.getElementById('zoomIn').addEventListener('click', () => {
+            scale += 0.25;
+            if (scale > 3) scale = 3;
+            document.getElementById('zoomLevel').textContent = Math.round(scale * 100);
+            renderPage(currentPage);
+        });
+
+        document.getElementById('zoomOut').addEventListener('click', () => {
+            scale -= 0.25;
+            if (scale < 0.5) scale = 0.5;
+            document.getElementById('zoomLevel').textContent = Math.round(scale * 100);
+            renderPage(currentPage);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentPage > 1) {
+                currentPage--;
+                renderPage(currentPage);
+                updateButtons();
+            } else if (e.key === 'ArrowRight' && currentPage < totalPages) {
+                currentPage++;
+                renderPage(currentPage);
+                updateButtons();
+            }
+        });
+
+        // Initialize
+        loadHandbook();
+    </script>
+</body>
+
+</html>
