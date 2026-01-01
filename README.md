@@ -46,7 +46,7 @@ npm install
 
 The `.env` file has been created for you. Update these values:
 
-```env
+<!-- ```env
 # MongoDB Configuration
 MONGODB_URI=mongodb://localhost:27017/skillforge
 
@@ -55,7 +55,7 @@ JWT_SECRET=skillforge_secret_key_2026_change_in_production
 
 # Admin Default Credentials
 ADMIN_EMAIL=admin@skillforge.com
-ADMIN_PASSWORD=SkillForge2026!
+ADMIN_PASSWORD=SkillForge2026! -->
 ```
 
 **⚠️ IMPORTANT**: Change the `JWT_SECRET` and `ADMIN_PASSWORD` in production!
@@ -92,11 +92,11 @@ The server will start on `http://localhost:5000`
 ### First-Time Setup
 
 1. **Start the server** - The default admin account will be created automatically
-2. **Login as admin**:
+<!-- 2. **Login as admin**:
    - Go to: `http://localhost:5000/public/admin-login.html`
    - Email: `admin@skillforge.com`
    - Password: `SkillForge2026!`
-   - **⚠️ Change this password immediately!**
+   - **⚠️ Change this password immediately!** -->
 
 3. **Upload handbooks**:
    - Navigate to the "Handbooks" tab
