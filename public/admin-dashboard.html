@@ -312,7 +312,7 @@
         const admin = JSON.parse(localStorage.getItem('admin') || '{}');
 
         if (!adminToken) {
-            window.location.href = '/public/admin-login.html';
+            window.location.href = '/admin-login.html';
         }
 
         const alertBox = document.getElementById('alertBox');
@@ -331,7 +331,7 @@
             e.preventDefault();
             localStorage.removeItem('adminToken');
             localStorage.removeItem('admin');
-            window.location.href = '/public/admin-login.html';
+            window.location.href = '/admin-login.html';
         });
 
         // Tab switching
