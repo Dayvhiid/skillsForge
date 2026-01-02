@@ -38,7 +38,7 @@ const sendWelcomeEmail = async (user) => {
           <p>Thank you for registering for the <strong>${user.track}</strong> track.</p>
           <p>You can now access your exclusive handbooks by logging into your student portal.</p>
           <p style="margin-top: 30px;">
-            <a href="${process.env.APP_URL || 'http://localhost:5000'}/login.html" 
+            <a href="${process.env.APP_URL || 'https://skillsforge-l9zf.onrender.com'}/login.html" 
                style="background-color: #D4AF37; color: #050B18; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
               Access Your Portal
             </a>

@@ -202,6 +202,14 @@
                         <h3 id="activeStudents">-</h3>
                         <p>Active (7 days)</p>
                     </div>
+                    <div class="stat-card">
+                        <h3 id="totalVisits">-</h3>
+                        <p>Total Visits</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="uniqueVisitors">-</h3>
+                        <p>Unique Visitors</p>
+                    </div>
                 </div>
 
                 <h3 class="mb-2">Students by Track</h3>
@@ -360,6 +368,8 @@
                     document.getElementById('totalHandbooks').textContent = data.data.totalHandbooks;
                     document.getElementById('recentRegistrations').textContent = data.data.recentRegistrations;
                     document.getElementById('activeStudents').textContent = data.data.activeStudents;
+                    document.getElementById('totalVisits').textContent = data.data.visitorStats.totalVisits;
+                    document.getElementById('uniqueVisitors').textContent = data.data.visitorStats.uniqueVisitors;
 
                     const trackStats = data.data.studentsByTrack.map(t =>
                         `<div class="stat-card"><h3>${t.count}</h3><p>${t._id}</p></div>`

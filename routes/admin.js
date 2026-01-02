@@ -6,6 +6,7 @@ const Admin = require('../models/Admin');
 const User = require('../models/User');
 const Handbook = require('../models/Handbook');
 const ReadingProgress = require('../models/ReadingProgress');
+const Visitor = require('../models/Visitor');
 const { protectAdmin } = require('../middleware/auth');
 const upload = require('../middleware/upload');
 const fs = require('fs').promises;
@@ -427,6 +428,9 @@ router.get('/analytics', protectAdmin, async (req, res) => {
             { $sort: { '_id.year': 1, '_id.month': 1 } }
         ]);
 
+        // Visitor stats
+        const visitorStats = await Visitor.getGlobalStats();
+
         res.json({
             success: true,
             data: {
@@ -436,7 +440,8 @@ router.get('/analytics', protectAdmin, async (req, res) => {
                 recentRegistrations,
                 activeStudents,
                 totalHandbookViews: handbookStats[0]?.totalViews || 0,
-                registrationsTrend
+                registrationsTrend,
+                visitorStats
             }
         });
     } catch (error) {

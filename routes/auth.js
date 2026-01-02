@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
 const { protectStudent } = require('../middleware/auth');
+const emailService = require('../utils/emailService');
 
 // Generate JWT Token
 const generateToken = (id, type) => {
@@ -56,6 +57,9 @@ router.post('/register', [
 
         // Generate token
         const token = generateToken(user._id, 'student');
+
+        //send user email
+        await emailService.sendWelcomeEmail(user);
 
         res.status(201).json({
             success: true,

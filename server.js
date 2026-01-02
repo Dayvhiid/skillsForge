@@ -9,6 +9,7 @@ const path = require('path');
 const authRoutes = require('./routes/auth');
 const studentRoutes = require('./routes/student');
 const adminRoutes = require('./routes/admin');
+const trackVisitor = require('./middleware/visitorTracker');
 
 const app = express();
 
@@ -28,6 +29,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(trackVisitor); // Track all visits
 
 // Rate limiting
 const limiter = rateLimit({
